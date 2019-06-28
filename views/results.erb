@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <% if @brexit_feedback != [] %>
+      <table>
+        <tr>
+          <% @brexit_feedback[0].keys.each do |key| %>
+            <th>
+              <%= key %>
+            </th>
+          <% end %>
+        </tr>
+        <% @brexit_feedback.each do |response| %>
+          <tr>
+            <% response.each do |question, answer| %>
+              <% if answer.is_a?(String) && answer.start_with?("***** ") %>
+                <td style="background-color:Tomato;">
+                  <%= answer[6..-1] %>
+                </td>
+              <% else %>
+                <td><%= answer %></td>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <p>No Feedback for that timeframe</p>
+    <% end %>
+  </body>
+</html>
